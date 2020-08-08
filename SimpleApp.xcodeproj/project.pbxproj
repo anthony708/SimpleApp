@@ -14,6 +14,7 @@
 		9D815B1924DDB47A00B424C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D815B1824DDB47A00B424C9 /* Assets.xcassets */; };
 		9D815B1C24DDB47A00B424C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D815B1A24DDB47A00B424C9 /* LaunchScreen.storyboard */; };
 		9D815B1F24DDB47A00B424C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D815B1E24DDB47A00B424C9 /* main.m */; };
+		9D815B4B24DEBF2900B424C9 /* icon.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9D815B4A24DEBF2900B424C9 /* icon.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		9D815B1B24DDB47A00B424C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D815B1D24DDB47A00B424C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D815B1E24DDB47A00B424C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9D815B4A24DEBF2900B424C9 /* icon.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = icon.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				9D815B1824DDB47A00B424C9 /* Assets.xcassets */,
 				9D815B1A24DDB47A00B424C9 /* LaunchScreen.storyboard */,
 				9D815B1D24DDB47A00B424C9 /* Info.plist */,
+				9D815B4A24DEBF2900B424C9 /* icon.bundle */,
 				9D815B1E24DDB47A00B424C9 /* main.m */,
 			);
 			path = SimpleApp;
@@ -133,6 +136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D815B4B24DEBF2900B424C9 /* icon.bundle in Resources */,
 				9D815B1C24DDB47A00B424C9 /* LaunchScreen.storyboard in Resources */,
 				9D815B1924DDB47A00B424C9 /* Assets.xcassets in Resources */,
 				9D815B1724DDB47600B424C9 /* Main.storyboard in Resources */,
