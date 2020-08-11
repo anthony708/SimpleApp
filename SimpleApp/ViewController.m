@@ -69,20 +69,32 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    UIView *view = [[UIView alloc] init]; //初始化
-    view.backgroundColor = [UIColor redColor]; // 设置背景颜色
-    view.frame = CGRectMake(100, 100, 100, 100); //设置布局
-    [self.view addSubview:view];
+//    UIView *view = [[UIView alloc] init]; //初始化
+//    view.backgroundColor = [UIColor redColor]; // 设置背景颜色
+//    view.frame = CGRectMake(100, 100, 100, 100); //设置布局
+//    [self.view addSubview:view];
     
     UIView *view2 = [[TestView alloc] init]; //初始化
     view2.backgroundColor = [UIColor greenColor]; // 设置背景颜色
     view2.frame = CGRectMake(150, 150, 100, 100); //设置布局
     [self.view addSubview:view2];
     
-
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushController)];
+    [view2 addGestureRecognizer:tapGesture];
 }
 
+- (void)pushController {
+    
+    UIViewController *viewController = [[UIViewController alloc] init];
+    viewController.view.backgroundColor = [UIColor whiteColor];
+    viewController.navigationItem.title = @"Content";
+    
+    viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"rightTitle" style:UIBarButtonItemStylePlain target:self action:nil];
+    
+    [self.navigationController pushViewController:viewController animated:YES];
+    
+}
 
 @end
