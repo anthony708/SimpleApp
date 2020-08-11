@@ -29,14 +29,14 @@
     
     ViewController *viewController = [[ViewController alloc] init];
     
-    UINavigationController *navigationController = [[UINavigationController alloc]
-        initWithRootViewController:viewController];
+//    UINavigationController *navigationController = [[UINavigationController alloc]
+//        initWithRootViewController:viewController];
 
 //    UIViewController *controller1 = [[UIViewController alloc] init];
-    navigationController.view.backgroundColor = [UIColor redColor];
-    navigationController.tabBarItem.title = @"News";
-    navigationController.tabBarItem.image = [UIImage imageNamed:@"icon.bundle/page@2x.png"];
-    navigationController.tabBarItem.selectedImage = [UIImage imageNamed:@"icon.bundle/page_selected@2x.png"];
+//    viewController.view.backgroundColor = [UIColor redColor];
+    viewController.tabBarItem.title = @"News";
+    viewController.tabBarItem.image = [UIImage imageNamed:@"icon.bundle/page@2x.png"];
+    viewController.tabBarItem.selectedImage = [UIImage imageNamed:@"icon.bundle/page_selected@2x.png"];
 
     UIViewController *controller2 = [[UIViewController alloc] init];
     controller2.view.backgroundColor = [UIColor yellowColor];
@@ -56,9 +56,13 @@
     controller4.tabBarItem.image = [UIImage imageNamed:@"icon.bundle/home@2x.png"];
     controller4.tabBarItem.selectedImage = [UIImage imageNamed:@"icon.bundle/home_selected@2x.png"];
 
-    [tabbarController setViewControllers:@[navigationController, controller2, controller3, controller4]];
+    [tabbarController setViewControllers:@[viewController, controller2, controller3, controller4]];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc]
+    initWithRootViewController:tabbarController];
 
-    self.window.rootViewController = tabbarController;
+//    self.window.rootViewController = tabbarController;
+    self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
 
 }
