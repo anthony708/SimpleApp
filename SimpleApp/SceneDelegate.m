@@ -9,7 +9,7 @@
 #import "SceneDelegate.h"
 #import "ViewController.h"
 
-@interface SceneDelegate ()
+@interface SceneDelegate ()<UITabBarControllerDelegate>
 
 @end
 
@@ -58,6 +58,9 @@
 
     [tabbarController setViewControllers:@[viewController, controller2, controller3, controller4]];
     
+    tabbarController.delegate = self;
+    
+    
     UINavigationController *navigationController = [[UINavigationController alloc]
     initWithRootViewController:tabbarController];
 
@@ -67,6 +70,9 @@
 
 }
 
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    NSLog(@"did select view controller");
+}
 
 - (void)sceneDidDisconnect:(UIScene *)scene {
     // Called as the scene is being released by the system.
