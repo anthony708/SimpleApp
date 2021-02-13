@@ -38,7 +38,7 @@
 
 @end
 
-@interface ViewController ()<UITableViewDataSource>
+@interface ViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
@@ -85,7 +85,19 @@
 //    [view2 addGestureRecognizer:tapGesture];
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     tableView.dataSource = self;
+    tableView.delegate = self;
+    
     [self.view addSubview:tableView];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *controller = [[UIViewController alloc] init];
+    controller.title = [NSString stringWithFormat:@"%@", @(indexPath.row)];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -99,7 +111,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"id"];
     }
     
-    cell.textLabel.text = @"title";
+    cell.textLabel.text = [NSString stringWithFormat:@"Title - %@", @(indexPath.row)];
     cell.detailTextLabel.text = @"subTitle";
     cell.imageView.image = [UIImage imageNamed:@"icon.bundle/video@2x.png"];
     return cell;
