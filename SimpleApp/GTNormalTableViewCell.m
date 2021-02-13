@@ -16,6 +16,7 @@
 @property(nonatomic, strong, readwrite) UILabel *timeLable;
 
 @property(nonatomic, strong, readwrite) UIImageView *rightImageView;
+@property(nonatomic, strong, readwrite) UIButton *deleteButton;
 
 @end
 
@@ -62,6 +63,15 @@
             self.rightImageView.contentMode = UIViewContentModeScaleAspectFit;
             self.rightImageView;
         })];
+        
+        [self.contentView addSubview:({
+            self.deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(290, 85, 15, 15)];
+            self.deleteButton.backgroundColor = [UIColor blueColor];
+            [self.deleteButton setTitle:@"x" forState:UIControlStateNormal];
+            [self.deleteButton setTitle:@"v" forState:UIControlStateHighlighted];
+            [self.deleteButton addTarget:self action:@selector(deleteButtonClick) forControlEvents:UIControlEventTouchUpInside];
+            self.deleteButton;
+        })];
     }
     return self;
 }
@@ -81,6 +91,10 @@
     self.timeLable.frame = CGRectMake(self.commentLable.frame.origin.x + self.commentLable.frame.size.width + 15, self.timeLable.frame.origin.y, self.timeLable.frame.size.width, self.timeLable.frame.size.height);
     
     self.rightImageView.image = [UIImage imageNamed:@"icon.bundle/timg.jpeg"];
+}
+
+- (void) deleteButtonClick {
+    NSLog(@"delete button clicked");
 }
 
 @end
