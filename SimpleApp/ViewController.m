@@ -38,7 +38,7 @@
 
 @end
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDataSource>
 
 @end
 
@@ -76,25 +76,40 @@
 //    view.frame = CGRectMake(100, 100, 100, 100); //设置布局
 //    [self.view addSubview:view];
     
-    UIView *view2 = [[TestView alloc] init]; //初始化
-    view2.backgroundColor = [UIColor greenColor]; // 设置背景颜色
-    view2.frame = CGRectMake(150, 150, 100, 100); //设置布局
-    [self.view addSubview:view2];
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushController)];
-    [view2 addGestureRecognizer:tapGesture];
+//    UIView *view2 = [[TestView alloc] init]; //初始化
+//    view2.backgroundColor = [UIColor greenColor]; // 设置背景颜色
+//    view2.frame = CGRectMake(150, 150, 100, 100); //设置布局
+//    [self.view addSubview:view2];
+//
+//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushController)];
+//    [view2 addGestureRecognizer:tapGesture];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
 }
 
-- (void)pushController {
-    
-    UIViewController *viewController = [[UIViewController alloc] init];
-    viewController.view.backgroundColor = [UIColor whiteColor];
-    viewController.navigationItem.title = @"Content";
-    
-    viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"rightTitle" style:UIBarButtonItemStylePlain target:self action:nil];
-    
-    [self.navigationController pushViewController:viewController animated:YES];
-    
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 20;
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"id"];
+    cell.textLabel.text = @"title";
+    cell.detailTextLabel.text = @"subTitle";
+    cell.imageView.image = [UIImage imageNamed:@"icon.bundle/video@2x.png"];
+    return cell;
+}
+
+//- (void)pushController {
+//
+//    UIViewController *viewController = [[UIViewController alloc] init];
+//    viewController.view.backgroundColor = [UIColor whiteColor];
+//    viewController.navigationItem.title = @"Content";
+//
+//    viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"rightTitle" style:UIBarButtonItemStylePlain target:self action:nil];
+//
+//    [self.navigationController pushViewController:viewController animated:YES];
+    
+//}
 
 @end
