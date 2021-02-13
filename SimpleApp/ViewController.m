@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GTNormalTableViewCell.h"
 
 //UIView的生命周期
 @interface TestView : UIView
@@ -52,19 +53,6 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear: animated];
-}
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear: animated];
-}
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear: animated];
-}
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear: animated];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -104,16 +92,14 @@
     return 20;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (GTNormalTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
+    GTNormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"id"];
+        cell = [[GTNormalTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"id"];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Title - %@", @(indexPath.row)];
-    cell.detailTextLabel.text = @"subTitle";
-    cell.imageView.image = [UIImage imageNamed:@"icon.bundle/video@2x.png"];
+    [cell layoutTableViewCell];
     return cell;
 }
 
