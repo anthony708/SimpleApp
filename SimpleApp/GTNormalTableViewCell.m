@@ -15,6 +15,8 @@
 @property(nonatomic, strong, readwrite) UILabel *commentLable;
 @property(nonatomic, strong, readwrite) UILabel *timeLable;
 
+@property(nonatomic, strong, readwrite) UIImageView *rightImageView;
+
 @end
 
 @implementation GTNormalTableViewCell
@@ -53,6 +55,13 @@
             self.timeLable.textColor = [UIColor grayColor];
             self.timeLable;
         })];
+        
+        [self.contentView addSubview:({
+            self.rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(300, 15, 70, 70)];
+            self.rightImageView.backgroundColor = [UIColor redColor];
+            self.rightImageView.contentMode = UIViewContentModeScaleAspectFit;
+            self.rightImageView;
+        })];
     }
     return self;
 }
@@ -70,6 +79,8 @@
     self.timeLable.text = @"3 mins ago";
     [self.timeLable sizeToFit];
     self.timeLable.frame = CGRectMake(self.commentLable.frame.origin.x + self.commentLable.frame.size.width + 15, self.timeLable.frame.origin.y, self.timeLable.frame.size.width, self.timeLable.frame.size.height);
+    
+    self.rightImageView.image = [UIImage imageNamed:@"icon.bundle/timg.jpeg"];
 }
 
 @end
