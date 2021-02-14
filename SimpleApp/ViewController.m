@@ -9,38 +9,12 @@
 #import "ViewController.h"
 #import "GTNormalTableViewCell.h"
 #import "GTDetailViewController.h"
+#import "GTDeleteCellView.h"
 
-//UIView的生命周期
-@interface TestView : UIView
+@interface ViewController ()<UITableViewDataSource, UITableViewDelegate, GTNormalTableViewCellDelegate>
 
-@end
-
-@implementation TestView
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-
-    }
-    return self;
-}
-
-//- (void)willMoveToSuperview:(nullable UIView *)newSuperview {
-//    [super willMoveToSuperview: newSuperview];
-//}
-//- (void)didMoveToSuperview {
-//    [super didMoveToSuperview];
-//}
-//- (void)willMoveToWindow:(nullable UIWindow *)newWindow {
-//    [super willMoveToWindow: newWindow];
-//}
-//- (void)didMoveToWindow {
-//    [super didMoveToWindow];
-//}
-
-@end
-
-@interface ViewController ()<UITableViewDataSource, UITableViewDelegate>
+@property(nonatomic, strong, readwrite) UITableView *tableView;
+@property(nonatomic, strong, readwrite) NSMutableArray *dataArray;
 
 @end
 
@@ -49,7 +23,10 @@
 - (instancetype) init {
     self = [super init];
     if (self) {
-        
+        _dataArray = @[].mutableCopy;
+        for (int i = 0; i < 20; i++) {
+            [_dataArray addObject:@(i)];
+        }
     }
     return self;
 }
@@ -60,23 +37,11 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    UIView *view = [[UIView alloc] init]; //初始化
-//    view.backgroundColor = [UIColor redColor]; // 设置背景颜色
-//    view.frame = CGRectMake(100, 100, 100, 100); //设置布局
-//    [self.view addSubview:view];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
     
-//    UIView *view2 = [[TestView alloc] init]; //初始化
-//    view2.backgroundColor = [UIColor greenColor]; // 设置背景颜色
-//    view2.frame = CGRectMake(150, 150, 100, 100); //设置布局
-//    [self.view addSubview:view2];
-//
-//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushController)];
-//    [view2 addGestureRecognizer:tapGesture];
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    
-    [self.view addSubview:tableView];
+    [self.view addSubview:_tableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -90,7 +55,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return _dataArray.count;
 }
 
 - (GTNormalTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,22 +63,24 @@
     GTNormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
     if (!cell) {
         cell = [[GTNormalTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"id"];
+        cell.delegate = self;
     }
     
     [cell layoutTableViewCell];
     return cell;
 }
 
-//- (void)pushController {
-//
-//    UIViewController *viewController = [[UIViewController alloc] init];
-//    viewController.view.backgroundColor = [UIColor whiteColor];
-//    viewController.navigationItem.title = @"Content";
-//
-//    viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"rightTitle" style:UIBarButtonItemStylePlain target:self action:nil];
-//
-//    [self.navigationController pushViewController:viewController animated:YES];
+- (void)tableViewCell: (UITableViewCell *) tableViewCell clickDeleteButton: (UIButton *) deleteButton {
+    GTDeleteCellView *deleteView = [[GTDeleteCellView alloc] initWithFrame:self.view.bounds];
     
-//}
+    CGRect rect = [tableViewCell convertRect:deleteButton.frame toView:nil];
+    
+    __weak typeof(self) wself = self;
+    [deleteView showDeleteViewFromPoint:rect.origin clickBlock:^{
+        __strong typeof(self) strongSelf = wself;
+        [strongSelf.dataArray removeLastObject];
+        [self.tableView deleteRowsAtIndexPaths:@[[strongSelf.tableView indexPathForCell:tableViewCell]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+}
 
 @end

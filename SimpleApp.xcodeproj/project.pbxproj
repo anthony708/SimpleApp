@@ -19,6 +19,7 @@
 		9D815B1F24DDB47A00B424C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D815B1E24DDB47A00B424C9 /* main.m */; };
 		9D815B4B24DEBF2900B424C9 /* icon.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9D815B4A24DEBF2900B424C9 /* icon.bundle */; };
 		9DAF5A5F25D8E1A600A27358 /* GTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAF5A5E25D8E1A600A27358 /* GTDetailViewController.m */; };
+		9DAF5A6225D8F2C200A27358 /* GTDeleteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAF5A6125D8F2C200A27358 /* GTDeleteCellView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		9D815B4A24DEBF2900B424C9 /* icon.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = icon.bundle; sourceTree = "<group>"; };
 		9DAF5A5D25D8E1A600A27358 /* GTDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTDetailViewController.h; sourceTree = "<group>"; };
 		9DAF5A5E25D8E1A600A27358 /* GTDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTDetailViewController.m; sourceTree = "<group>"; };
+		9DAF5A6025D8F2C200A27358 /* GTDeleteCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTDeleteCellView.h; sourceTree = "<group>"; };
+		9DAF5A6125D8F2C200A27358 /* GTDeleteCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTDeleteCellView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,8 @@
 				9D59CDBB25D7C6430021DA5D /* GTNormalTableViewCell.m */,
 				9DAF5A5D25D8E1A600A27358 /* GTDetailViewController.h */,
 				9DAF5A5E25D8E1A600A27358 /* GTDetailViewController.m */,
+				9DAF5A6025D8F2C200A27358 /* GTDeleteCellView.h */,
+				9DAF5A6125D8F2C200A27358 /* GTDeleteCellView.m */,
 			);
 			path = SimpleApp;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DAF5A5F25D8E1A600A27358 /* GTDetailViewController.m in Sources */,
+				9DAF5A6225D8F2C200A27358 /* GTDeleteCellView.m in Sources */,
 				9D59CDBC25D7C6430021DA5D /* GTNormalTableViewCell.m in Sources */,
 				9D815B1424DDB47600B424C9 /* ViewController.m in Sources */,
 				9D59CDB625D79DBD0021DA5D /* GTVideoViewController.m in Sources */,
