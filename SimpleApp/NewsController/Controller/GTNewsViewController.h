@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
+/**
+ new controller
+ */
+@interface GTNewsViewController : UIViewController
 
 
 @end

@@ -6,19 +6,21 @@
 //  Copyright © 2020 DuanZhu. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "GTNewsViewController.h"
 #import "GTNormalTableViewCell.h"
 #import "GTDetailViewController.h"
 #import "GTDeleteCellView.h"
 
-@interface ViewController ()<UITableViewDataSource, UITableViewDelegate, GTNormalTableViewCellDelegate>
+@interface GTNewsViewController ()<UITableViewDataSource, UITableViewDelegate, GTNormalTableViewCellDelegate>
 
 @property(nonatomic, strong, readwrite) UITableView *tableView;
 @property(nonatomic, strong, readwrite) NSMutableArray *dataArray;
 
 @end
 
-@implementation ViewController
+@implementation GTNewsViewController
+
+#pragma mark - life cycle
 
 - (instancetype) init {
     self = [super init];
@@ -43,6 +45,8 @@
     
     [self.view addSubview:_tableView];
 }
+
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
