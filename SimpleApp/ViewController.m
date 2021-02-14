@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "GTNormalTableViewCell.h"
+#import "GTDetailViewController.h"
 
 //UIView的生命周期
 @interface TestView : UIView
@@ -83,7 +84,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIViewController *controller = [[UIViewController alloc] init];
+    GTDetailViewController *controller = [[GTDetailViewController alloc] init];
     controller.title = [NSString stringWithFormat:@"%@", @(indexPath.row)];
     [self.navigationController pushViewController:controller animated:YES];
 }
