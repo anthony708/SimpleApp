@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38489DED0E297D4A1F5757D0 /* libPods-SimpleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 485077BB09832DFD93AA4AFA /* libPods-SimpleApp.a */; };
 		9D59CDB625D79DBD0021DA5D /* GTVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D59CDB525D79DBD0021DA5D /* GTVideoViewController.m */; };
 		9D59CDB925D7AE0C0021DA5D /* GTRecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D59CDB825D7AE0C0021DA5D /* GTRecommendViewController.m */; };
 		9D59CDBC25D7C6430021DA5D /* GTNormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D59CDBB25D7C6430021DA5D /* GTNormalTableViewCell.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		485077BB09832DFD93AA4AFA /* libPods-SimpleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SimpleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		51B963CF86DF73E10DFE115E /* Pods-SimpleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleApp.release.xcconfig"; path = "Target Support Files/Pods-SimpleApp/Pods-SimpleApp.release.xcconfig"; sourceTree = "<group>"; };
 		9D59CDB425D79DBD0021DA5D /* GTVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTVideoViewController.h; sourceTree = "<group>"; };
 		9D59CDB525D79DBD0021DA5D /* GTVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTVideoViewController.m; sourceTree = "<group>"; };
 		9D59CDB725D7AE0C0021DA5D /* GTRecommendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTRecommendViewController.h; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		9DAF5A6125D8F2C200A27358 /* GTDeleteCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTDeleteCellView.m; sourceTree = "<group>"; };
 		9DAF5A6A25DA8E8100A27358 /* GTListLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTListLoader.h; sourceTree = "<group>"; };
 		9DAF5A6B25DA8E8100A27358 /* GTListLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTListLoader.m; sourceTree = "<group>"; };
+		EA4BF3E4ABBFF094DE235C0B /* Pods-SimpleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleApp.debug.xcconfig"; path = "Target Support Files/Pods-SimpleApp/Pods-SimpleApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,17 +60,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38489DED0E297D4A1F5757D0 /* libPods-SimpleApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		553F6831740AD807C76FEB61 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EA4BF3E4ABBFF094DE235C0B /* Pods-SimpleApp.debug.xcconfig */,
+				51B963CF86DF73E10DFE115E /* Pods-SimpleApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9D815B0024DDB47600B424C9 = {
 			isa = PBXGroup;
 			children = (
 				9D815B0B24DDB47600B424C9 /* SimpleApp */,
 				9D815B0A24DDB47600B424C9 /* Products */,
+				553F6831740AD807C76FEB61 /* Pods */,
+				DE36454B3EC224AF649D491D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,6 +182,14 @@
 			path = Loader;
 			sourceTree = "<group>";
 		};
+		DE36454B3EC224AF649D491D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				485077BB09832DFD93AA4AFA /* libPods-SimpleApp.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -172,6 +197,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D815B2224DDB47A00B424C9 /* Build configuration list for PBXNativeTarget "SimpleApp" */;
 			buildPhases = (
+				C48D493D18D9A467CE95045D /* [CP] Check Pods Manifest.lock */,
 				9D815B0524DDB47600B424C9 /* Sources */,
 				9D815B0624DDB47600B424C9 /* Frameworks */,
 				9D815B0724DDB47600B424C9 /* Resources */,
@@ -230,6 +256,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C48D493D18D9A467CE95045D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SimpleApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9D815B0524DDB47600B424C9 /* Sources */ = {
@@ -383,6 +434,7 @@
 		};
 		9D815B2324DDB47A00B424C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA4BF3E4ABBFF094DE235C0B /* Pods-SimpleApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -399,6 +451,7 @@
 		};
 		9D815B2424DDB47A00B424C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51B963CF86DF73E10DFE115E /* Pods-SimpleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
