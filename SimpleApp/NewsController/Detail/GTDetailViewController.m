@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong, readwrite) WKWebView *webView;
 @property (nonatomic, strong, readwrite) UIProgressView *progressView;
+@property (nonatomic, strong, readwrite) NSString *articleURL;
 
 @end
 
@@ -20,6 +21,14 @@
 
 - (void) dealloc {
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+}
+
+- (instancetype)initWithUrlString: (NSString *)urlString {
+    self = [super init];
+    if (self) {
+        self.articleURL = urlString;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -32,9 +41,10 @@
     
     [self.view addSubview:({
         self.progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 88, self.view.frame.size.width, 20)];
+        self.progressView;
     })];
     
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://time.geekbang.org/"]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.articleURL]]];
     
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
 }

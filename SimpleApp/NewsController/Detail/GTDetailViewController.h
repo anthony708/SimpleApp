@@ -10,7 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ 文章详情页
+ */
 @interface GTDetailViewController : UIViewController
+
+- (instancetype)initWithUrlString: (NSString *)urlString;
 
 @end
 

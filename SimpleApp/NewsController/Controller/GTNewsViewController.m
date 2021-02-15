@@ -11,11 +11,12 @@
 #import "GTDetailViewController.h"
 #import "GTDeleteCellView.h"
 #import "GTListLoader.h"
+#import "GTListItem.h"
 
 @interface GTNewsViewController ()<UITableViewDataSource, UITableViewDelegate, GTNormalTableViewCellDelegate>
 
 @property(nonatomic, strong, readwrite) UITableView *tableView;
-@property(nonatomic, strong, readwrite) NSMutableArray *dataArray;
+@property(nonatomic, strong, readwrite) NSArray *dataArray;
 @property(nonatomic, strong, readwrite) GTListLoader *listLoader;
 
 @end
@@ -27,10 +28,10 @@
 - (instancetype) init {
     self = [super init];
     if (self) {
-        _dataArray = @[].mutableCopy;
-        for (int i = 0; i < 20; i++) {
-            [_dataArray addObject:@(i)];
-        }
+//        _dataArray = @[].mutableCopy;
+//        for (int i = 0; i < 20; i++) {
+//            [_dataArray addObject:@(i)];
+//        }
     }
     return self;
 }
@@ -48,7 +49,13 @@
     [self.view addSubview:_tableView];
     
     self.listLoader = [[GTListLoader alloc] init];
-    [self.listLoader loadListData];
+    
+    __weak typeof(self)wself = self;
+    [self.listLoader loadListDataWithFinishBlock:^(BOOL success, NSArray<GTListItem *> * _Nonnull dataArray) {
+        __strong typeof(wself) strongSelf = wself;
+        strongSelf.dataArray = dataArray;
+        [strongSelf.tableView reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -58,7 +65,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GTDetailViewController *controller = [[GTDetailViewController alloc] init];
+    GTListItem *item = [self.dataArray objectAtIndex:indexPath.row];
+    GTDetailViewController *controller = [[GTDetailViewController alloc] initWithUrlString:item.articleURL];
     controller.title = [NSString stringWithFormat:@"%@", @(indexPath.row)];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -75,21 +83,21 @@
         cell.delegate = self;
     }
     
-    [cell layoutTableViewCell];
+    [cell layoutTableViewCellWithItem:[self.dataArray objectAtIndex:indexPath.row]];
     return cell;
 }
 
 - (void)tableViewCell: (UITableViewCell *) tableViewCell clickDeleteButton: (UIButton *) deleteButton {
-    GTDeleteCellView *deleteView = [[GTDeleteCellView alloc] initWithFrame:self.view.bounds];
-    
-    CGRect rect = [tableViewCell convertRect:deleteButton.frame toView:nil];
-    
-    __weak typeof(self) wself = self;
-    [deleteView showDeleteViewFromPoint:rect.origin clickBlock:^{
-        __strong typeof(self) strongSelf = wself;
-        [strongSelf.dataArray removeLastObject];
-        [self.tableView deleteRowsAtIndexPaths:@[[strongSelf.tableView indexPathForCell:tableViewCell]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }];
+//    GTDeleteCellView *deleteView = [[GTDeleteCellView alloc] initWithFrame:self.view.bounds];
+//
+//    CGRect rect = [tableViewCell convertRect:deleteButton.frame toView:nil];
+//
+//    __weak typeof(self) wself = self;
+//    [deleteView showDeleteViewFromPoint:rect.origin clickBlock:^{
+//        __strong typeof(self) strongSelf = wself;
+//        [strongSelf.dataArray removeLastObject];
+//        [self.tableView deleteRowsAtIndexPaths:@[[strongSelf.tableView indexPathForCell:tableViewCell]] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    }];
 }
 
 @end
