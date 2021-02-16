@@ -29,8 +29,11 @@
 
     NSURLSession *session = [NSURLSession sharedSession];
 
-    NSURLSessionTask *dataTask = [session dataTaskWithURL:listURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __weak typeof(self) wself = self;
+    
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:listURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
+        __strong typeof(wself) strongSelf = wself;
         NSError *jsonError;
         id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
         
@@ -43,6 +46,8 @@
             [listItemArray addObject:listItem];
         }
         
+        [self _archiveListDataWithArray:listItemArray.copy];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             if (finishBlock) {
                 finishBlock(error == nil, listItemArray.copy);
@@ -52,6 +57,47 @@
     }];
 
     [dataTask resume];
+}
+
+- (void)_archiveListDataWithArray:(NSArray<GTListItem *> *)array {
+
+    NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSLog(@"");
+    NSString *cachePath = [pathArray firstObject];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    // create directory
+    NSString *dataPath = [cachePath stringByAppendingPathComponent:@"GTData"];
+    NSError *createError;
+    [fileManager createDirectoryAtPath:dataPath withIntermediateDirectories:YES attributes:nil error:&createError];
+    
+    // create file
+    NSString *listDataPath = [dataPath stringByAppendingPathComponent:@"list"];
+    
+//    NSData *listData = [NSKeyedArchiver archivedDataWithRootObject:array];
+    NSData *listData = [NSKeyedArchiver archivedDataWithRootObject:array requiringSecureCoding:YES error:nil];
+    
+//    NSData *listData = [@"abc" dataUsingEncoding:NSUTF8StringEncoding];
+    [fileManager createFileAtPath:listDataPath contents:listData attributes:nil];
+    
+    // search file
+    BOOL fileExist = [fileManager fileExistsAtPath:listDataPath];
+    
+    // delete file
+//    if (fileExist) {
+//        [fileManager removeItemAtPath:listDataPath error:nil];
+//    }
+    
+    NSLog(@"");
+    
+    // add on data
+//    NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:listDataPath];
+//    [fileHandle seekToEndOfFile];
+//    [fileHandle writeData:[@"def" dataUsingEncoding:NSUTF8StringEncoding]];
+//
+//    [fileHandle synchronizeFile];
+//    [fileHandle closeFile];
 }
 
 @end

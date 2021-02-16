@@ -10,6 +10,37 @@
 
 @implementation GTListItem
 
+#pragma mark - NSSecurityCoding
+
+- (nullable instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super init];
+    if (self) {
+        self.category = [coder decodeObjectForKey:@"category"];
+        self.picURL = [coder decodeObjectForKey:@"picURL"];
+        self.uniqueKey = [coder decodeObjectForKey:@"uniqueKey"];
+        self.title = [coder decodeObjectForKey:@"title"];
+        self.date = [coder decodeObjectForKey:@"date"];
+        self.authorName = [coder decodeObjectForKey:@"authorName"];
+        self.articleURL = [coder decodeObjectForKey:@"articleURL"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:self.category forKey:@"category"];
+    [coder encodeObject:self.picURL forKey:@"picURL"];
+    [coder encodeObject:self.uniqueKey forKey:@"uniqueKey"];
+    [coder encodeObject:self.title forKey:@"title"];
+    [coder encodeObject:self.date forKey:@"date"];
+    [coder encodeObject:self.authorName forKey:@"authorName"];
+    [coder encodeObject:self.articleURL forKey:@"articleURL"];
+}
+
++ (BOOL)supportsSecurityCoding {
+    return YES;
+}
+
+#pragma mark - public method
 
 -(void) configWithDictionary:(NSDictionary *)dictionary {
     
