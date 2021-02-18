@@ -103,9 +103,24 @@
     [self.timeLable sizeToFit];
     self.timeLable.frame = CGRectMake(self.commentLable.frame.origin.x + self.commentLable.frame.size.width + 15, self.timeLable.frame.origin.y, self.timeLable.frame.size.width, self.timeLable.frame.size.height);
 
-#warning
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:item.picURL]]];
-    self.rightImageView.image = image;
+//    NSThread *downloadImageThread = [[NSThread alloc] initWithBlock:^{
+//        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:item.picURL]]];
+//        self.rightImageView.image = image;
+//    }];
+//
+//    downloadImageThread.name = @"downloadImageThread";
+//    [downloadImageThread start];
+    
+    dispatch_queue_global_t downloadQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_queue_main_t mainQueue = dispatch_get_main_queue();
+    
+    dispatch_async(downloadQueue, ^{
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:item.picURL]]];
+        dispatch_async(mainQueue, ^{
+            self.rightImageView.image = image;
+        });
+    });
+    
 }
 
 - (void) deleteButtonClick {
