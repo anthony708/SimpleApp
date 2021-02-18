@@ -36,7 +36,7 @@
     [coder encodeObject:self.articleURL forKey:@"articleURL"];
 }
 
-+ (BOOL)supportsSecurityCoding {
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 

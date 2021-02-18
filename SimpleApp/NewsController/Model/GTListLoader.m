@@ -25,6 +25,11 @@
 //        NSLog(@"");
 //    }];
     
+    NSArray<GTListItem *> *listData = [self _readDataFromLocal];
+    if (listData) {
+        finishBlock(YES, listData);
+    }
+    
     __unused NSURLRequest *listRequest = [NSURLRequest requestWithURL:listURL];
 
     NSURLSession *session = [NSURLSession sharedSession];
@@ -59,10 +64,28 @@
     [dataTask resume];
 }
 
+- (NSArray<GTListItem *> *)_readDataFromLocal {
+    
+    NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachePath = [pathArray firstObject];
+    NSString *listDataPath = [cachePath stringByAppendingPathComponent:@"GTData/list"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSData *readListData = [fileManager contentsAtPath:listDataPath];
+       
+    id unarchiveObj = [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithObjects:[NSArray class],[GTListItem class], nil] fromData:readListData error:nil];
+    
+    if ([unarchiveObj isKindOfClass:[NSArray class]] && [unarchiveObj count] > 0) {
+        return (NSArray<GTListItem *> *)unarchiveObj;
+    }
+    return nil;
+    
+}
+
 - (void)_archiveListDataWithArray:(NSArray<GTListItem *> *)array {
 
     NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSLog(@"");
     NSString *cachePath = [pathArray firstObject];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -75,21 +98,22 @@
     // create file
     NSString *listDataPath = [dataPath stringByAppendingPathComponent:@"list"];
     
-//    NSData *listData = [NSKeyedArchiver archivedDataWithRootObject:array];
     NSData *listData = [NSKeyedArchiver archivedDataWithRootObject:array requiringSecureCoding:YES error:nil];
     
 //    NSData *listData = [@"abc" dataUsingEncoding:NSUTF8StringEncoding];
     [fileManager createFileAtPath:listDataPath contents:listData attributes:nil];
     
+    NSData *readListData = [fileManager contentsAtPath:listDataPath];
+    
+    id unarchiveObj = [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithObjects:[NSArray class],[GTListItem class], nil] fromData:readListData error:nil];
+    
     // search file
-    BOOL fileExist = [fileManager fileExistsAtPath:listDataPath];
+//    BOOL fileExist = [fileManager fileExistsAtPath:listDataPath];
     
     // delete file
 //    if (fileExist) {
 //        [fileManager removeItemAtPath:listDataPath error:nil];
 //    }
-    
-    NSLog(@"");
     
     // add on data
 //    NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:listDataPath];
